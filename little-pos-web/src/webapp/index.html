@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="js/com/wei/app.js"></script>
+    <script src="js/com/wei/service/PlaybookService.js"></script>
+    <script src="js/com/wei/controller/PlaybookController.js"></script>
+
+</head>
+<body>
+<h2>Hello world.</h2>
+<div class="container" ng-app="myApp" ng-controller="playbookSelectCtrl as pbSelect">
+    <div class="row">
+        <label ng-repeat="cate in pbSelect.categoryList">
+            <input type="radio" ng-value="cate.value" ng-model="pbSelect.selectCategoryId"
+                   ng-change="pbSelect.listPlaybooks()"/>{{cate.name}}
+        </label>
+        <br/>
+        {{pbSelect.selectCategoryId}}
+    </div>
+    <div class="row">
+        <select name='cveOptions' ng-model="pbSelect.cveId"
+                ng-options="cve.Id as cve.name for cve in pbSelect.cveList" ng-disabled="pbSelect.disableCVEList" >
+            <option value="">Select CVE Id</option>
+        </select>
+        <select name='osVersionOptions' ng-model="pbSelect.osVerId"
+                ng-options="os.Id as os.name for os in pbSelect.osVerList" ng-disabled="pbSelect.disableOSList" >
+            <option value="">Select OS Version</option>
+        </select>
+        <select name='playbookOptions' ng-model="pbSelect.playbookId"
+                ng-options="pb.value as pb.name for pb in pbSelect.playbookList" >
+            <option value="">Select Playbook</option>
+        </select>
+
+        {{pbSelect.playbookId}}
+        <div>
+            <table>
+                <tr>
+                    <td>工號</td>
+                    <td>NT Account</td>
+                    <td>姓名</td>
+                </tr>
+                <tr ng-repeat="executor in pbSelect.executorList">
+                    <td>{{executor.id}}</td>
+                    <td>{{executor.uuid}}</td>
+                    <td>{{executor.username}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

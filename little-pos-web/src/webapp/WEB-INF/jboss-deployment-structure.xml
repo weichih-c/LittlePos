@@ -1,0 +1,16 @@
+<jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.2">
+    <deployment>
+        <dependencies>
+            <!--<module name="com.spring" />-->
+            <module name="com.microsoft.sqlserver.jdbc-driver" slot="main"/>
+        </dependencies>
+        <!-- exclude-subsystem prevents a subsystems deployment unit processors running on a deployment -->
+        <!-- which gives basically the same effect as removing the subsystem, but it only affects single deployment -->
+        <exclude-subsystems>
+            <subsystem name="jpa" />
+            <subsystem name="jaxrs" />
+            <subsystem name="messaging" />
+            <!--<subsystem name="webservices" />-->
+        </exclude-subsystems>
+    </deployment>
+</jboss-deployment-structure>
