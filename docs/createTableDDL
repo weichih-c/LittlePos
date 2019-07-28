@@ -1,0 +1,95 @@
+-- create DB
+CREATE DATABASE LittlePos;
+
+-- switch th LittlePos DB
+use LittlePos;
+
+-- create Tables 
+CREATE TABLE Products
+(
+    ProductId NUMERIC(10,0) NOT NULL,
+    Name NVARCHAR(100) NOT NULL,
+    Descrpt NVARCHAR(4000),
+    Price NUMERIC(10, 4) DEFAULT '0.0',
+    TotalStock NUMERIC(18, 0),
+    ResrvStock NUMERIC(18, 0),
+    IdleStock NUMERIC(18, 0),
+    CreateDate DATETIME NOT NULL,
+    CreateUser NVARCHAR(50) NOT NULL,
+    UpdateDate DATETIME NOT NULL,
+    UpdateUser NVARCHAR(50) NOT NULL,
+    CONSTRAINT PK_Products PRIMARY KEY CLUSTERED(ProductId)
+);
+
+CREATE TABLE ProductPhotos
+(
+    ProductId NUMERIC(10,0) NOT NULL,
+    PhotoId NUMERIC(10,0) NOT NULL,
+    PhotoPath NVARCHAR(200),
+    CreateDate DATETIME NOT NULL,
+    CreateUser NVARCHAR(50) NOT NULL,
+    UpdateDate DATETIME NOT NULL,
+    UpdateUser NVARCHAR(50) NOT NULL,
+    CONSTRAINT PK_ProductPhotos PRIMARY KEY CLUSTERED(ProductId, PhotoId)
+);
+
+CREATE TABLE StockAddHist
+(
+    TimeStamp VARCHAR(50) NOT NULL,
+    ProductId NUMERIC(10,0) NOT NULL,
+    Quantity NUMERIC(18,0),
+    CreateDate DATETIME NOT NULL,
+    CreateUser NVARCHAR(50) NOT NULL,
+    UpdateDate DATETIME NOT NULL,
+    UpdateUser NVARCHAR(50) NOT NULL,
+    CONSTRAINT PK_StockAddHist PRIMARY KEY CLUSTERED(TimeStamp)
+);
+
+CREATE TABLE Orders
+(
+    OrderId VARCHAR(100) NOT NULL,
+    ProductId NUMERIC(10,0) NOT NULL,
+    Quantity NUMERIC(18,0),
+    OrderDate DATETIME,
+    DeliveryDate DATETIME,
+    IsDelivered VARCHAR(1),
+    CustomerId NUMERIC(10,0),
+    CreateDate DATETIME NOT NULL,
+    CreateUser NVARCHAR(50) NOT NULL,
+    UpdateDate DATETIME NOT NULL,
+    UpdateUser NVARCHAR(50) NOT NULL,
+    CONSTRAINT PK_Orders PRIMARY KEY CLUSTERED(OrderId, ProductId)
+);
+
+CREATE TABLE OrderChangeHist
+(
+    OrderId VARCHAR(100) NOT NULL,
+    ProductId NUMERIC(10,0) NOT NULL,
+    Quantity NUMERIC(18,0),
+    OrderDate DATETIME,
+    DeliveryDate DATETIME,
+    CustomerId NUMERIC(10,0),
+    CreateDate DATETIME NOT NULL,
+    CreateUser NVARCHAR(50) NOT NULL,
+    UpdateDate DATETIME NOT NULL,
+    UpdateUser NVARCHAR(50) NOT NULL,
+    CONSTRAINT PK_OrderChangeHist PRIMARY KEY CLUSTERED(OrderId, ProductId)
+);
+
+CREATE TABLE Customers
+(
+    CustomerId NUMERIC(10,0) NOT NULL,
+    CorpName NVARCHAR(100), 
+    Descrpt NVARCHAR(4000),
+    Phone VARCHAR(100),
+    Address NVARCHAR(100),
+    Email VARCHAR(100),
+    Fax VARCHAR(100),
+    Contactor NVARCHAR(100),
+    LatestOrderTime DATETIME,
+    CreateDate DATETIME NOT NULL,
+    CreateUser NVARCHAR(50) NOT NULL,
+    UpdateDate DATETIME NOT NULL,
+    UpdateUser NVARCHAR(50) NOT NULL,
+    CONSTRAINT PK_Customers PRIMARY KEY CLUSTERED(CustomerId)
+);
