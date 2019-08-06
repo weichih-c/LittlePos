@@ -12,6 +12,19 @@
 
     <artifactId>little-pos-web</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>${my.group.id}</groupId>
+            <artifactId>little-pos-common</artifactId>
+            <version>${my.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${my.group.id}</groupId>
+            <artifactId>little-pos-service</artifactId>
+            <version>${my.version}</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
